@@ -67,7 +67,7 @@ const styles = StyleSheet.create({
   imageBackground: {
     height: 'auto',
     paddingTop: 50,
-    paddingBottom: 2,
+    // paddingBottom: 2,
     justifyContent: 'space-between',
     gap: 30,
     alignItems: 'center',
@@ -103,15 +103,15 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   categoryImage: {
-    width: 80,
-    height: 80,
+    width: 82,
+    height: 82,
     borderRadius: 50,
   },
   categoryName: {
     fontSize: 16, 
     textAlign: 'center',
     color: "grey",
-    marginTop: -6,
+    marginTop: -7,
   },
 });
 
