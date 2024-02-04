@@ -7,7 +7,7 @@ const Home1 = () => {
   const navigation = useNavigation();
 
   const handleLogoPress = () => {
-    navigation.navigate('Home3');
+    navigation.navigate('Home2');
   };
 
   return (

@@ -8,16 +8,16 @@ import Home3 from './screens/home3';
 import Logging from './screens/logging';
 import GoToLogin from './screens/go-to-login';
 import Products from './screens/product';
-
+import ProductView from './screens/product-view'; 
+import Layout from './components/layout';
 const Stack = createNativeStackNavigator();
-const ProductsStack = createNativeStackNavigator();
 
 function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen name="Home1" component={Home1} options={{ headerShown: false }} />
-        {/* <Stack.Screen name="Home2" component={Home2} options={{ headerShown: false }} /> */}
+        <Stack.Screen name="Home2" component={Home2} options={{ headerShown: false }} />
         <Stack.Screen name="Home3" component={Home3} options={{ headerShown: false }} />
         <Stack.Screen name="GoToLogin" component={GoToLogin} options={{ headerShown: false }} />
         <Stack.Screen name="Login" component={Login} options={{ headerShown: false }} />
@@ -36,20 +36,25 @@ function App() {
   );
 }
 
-// Create a separate navigator for the Products screen
+const ProductsStack = createNativeStackNavigator();
+
 function ProductsStackNavigator() {
   return (
+      <Layout>
     <ProductsStack.Navigator>
+
       <ProductsStack.Screen
         name="Products"
         component={Products}
-        options={{
-          headerShown: false,
-
-        }}
-      />
-      {/* Add additional screens for the Products stack if needed */}
+        options={{ headerShown: false }}
+        />
+      <ProductsStack.Screen
+        name="ProductView"
+        component={ProductView}
+        options={{ headerShown: false }}
+        />
     </ProductsStack.Navigator>
+        </Layout>
   );
 }
 

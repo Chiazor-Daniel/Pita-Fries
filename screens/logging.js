@@ -14,7 +14,7 @@ const Logging = () => {
       } else {
         clearInterval(interval);
       }
-    }, 200);
+    }, 500);
     progress == 1 &&  navigation.navigate('ProductsStack', { screen: 'Products' })
     // Cleanup the interval when the component is unmounted
     return () => clearInterval(interval);
