@@ -5,6 +5,8 @@ import { View, Image, ImageBackground, TextInput, StyleSheet, FlatList, Text, To
 import { useNavigation } from '@react-navigation/native';
 import Layout from '../components/layout';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
+import { SharedElement } from 'react-navigation-shared-element';
+
 
 const Products = () => {
   const navigation = useNavigation();
@@ -18,23 +20,24 @@ const Products = () => {
   ];
 
   const products = [
-    { name: "Big sized pepperoni sharwarma", src: require('../assets/shawarma.png'), price: 300 },
-    { name: "Fizz Double-beef burger", src: require('../assets/burger1.png'), price: 500 },
-    { name: "Medium chicken pizza", src: require('../assets/pizza1.png'), price: 350 },
-    { name: "Large Chicken wings suya", src: require('../assets/chicken1.png'), price: 300 },
-    { name: "French fries", src: require('../assets/fires1.png'), price: 100 },
-    { name: "Plain strawberry smoothie", src: require('../assets/smoothie1.png'), price: 100 },
-    { name: "Alferdo Mocktail", src: require('../assets/alferdo.png'), price: 150 },
-    { name: "Seafood", src: require('../assets/sea.png'), price: 300 },
-    { name: "Pasta Astalavista", src: require('../assets/pasta.jpeg'), price: 100 },
+    { id: '1', name: "Big sized pepperoni sharwarma", src: require('../assets/shawarma.png'), price: 300 },
+    { id: '2', name: "Fizz Double-beef burger", src: require('../assets/burger1.png'), price: 500 },
+    { id: '3', name: "Medium chicken pizza", src: require('../assets/pizza1.png'), price: 350 },
+    { id: '4', name: "Large Chicken wings suya", src: require('../assets/chicken1.png'), price: 300 },
+    { id: '5', name: "French fries", src: require('../assets/fires1.png'), price: 100 },
+    { id: '6', name: "Plain strawberry smoothie", src: require('../assets/smoothie1.png'), price: 100 },
+    { id: '7', name: "Alferdo Mocktail", src: require('../assets/alferdo.png'), price: 150 },
+    { id: '8', name: "Seafood", src: require('../assets/sea.png'), price: 300 },
+    { id: '9', name: "Pasta Astalavista", src: require('../assets/pasta.jpeg'), price: 100 },
   ];
+  
 
   const handleCategoryPress = (categoryName) => {
     console.log(`Category pressed: ${categoryName}`);
   };
 
   const handleProductPress = (productName, productData) => {
-    console.log(`Product pressed: ${productName}`);
+    console.log(`Product pressed: ${productData}`);
     navigation.navigate('ProductView', {
       productName: productName,
       productData: productData,
@@ -51,14 +54,19 @@ const Products = () => {
   );
 
   const renderProductItem = ({ item }) => (
-    <TouchableOpacity onPress={() => handleProductPress(item.name, item)}>
-      <View style={styles.productItem}>
-        <Image source={item.src} style={styles.productImage} />
-        <Text style={styles.productName}>{item.name}</Text>
-        <Text style={styles.productPrice}>{`$${item.price}`}</Text>
-      </View>
+      <TouchableOpacity onPress={() => handleProductPress(item.name, item)}>
+        <View style={styles.productItem}>
+        <SharedElement id={item.id}>
+          <Image source={item.src} style={styles.productImage} />
+        </SharedElement>
+        <SharedElement id={item.id}>
+          <Text style={styles.productName}>{item.name}</Text>
+      </SharedElement>
+          <Text style={styles.productPrice}>{`$${item.price}`}</Text>
+        </View>
     </TouchableOpacity>
   );
+  
 
   return (
       <View style={styles.container}>
@@ -191,8 +199,8 @@ const styles = StyleSheet.create({
     padding: 10,
   },
   productImage: {
-    height: 125,
-    width: 125,
+    height: 115,
+    width: 115,
     borderRadius: 20,
   },
   productName: {

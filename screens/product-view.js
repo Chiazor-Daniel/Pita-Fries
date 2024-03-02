@@ -5,6 +5,7 @@ import { View, Text, Image, StyleSheet, FlatList, TouchableOpacity } from 'react
 // import CheckBox from '@react-native-community/checkbox';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import { useNavigation } from '@react-navigation/native';
+import { SharedElement } from 'react-navigation-shared-element';
 
 const ProductView = ({ route }) => {
   const { productName, productData } = route.params;
@@ -87,15 +88,19 @@ const ProductView = ({ route }) => {
 
   return (
     <View style={styles.container}>
+        {/* <SharedElement id={productData.id}> */}
       <Image source={productData.src} style={styles.productImage} />
+        {/* </SharedElement> */}
       <TouchableOpacity
         style={{ position: 'absolute', top: 40, left: 10, backgroundColor: 'transparent', borderRadius: 50, borderColor: 'white', borderWidth: 1.4, padding: 10 }}
         onPress={()=>navigation.goBack()}
-      >
+        >
         <MaterialIcons name="arrow-back" size={30} color="white" />
       </TouchableOpacity>
       <View style={styles.productDetailsContainer}>
+          <SharedElement id={productData.id}>
         <Text style={styles.productName}>{productName}</Text>
+            </SharedElement>
         <Text style={styles.productPrice}>{`$${productData.price}`}</Text>
         <View style={{ flexDirection: 'column' }}>
           <Text style={{ fontSize: 20, padding: 10, color: 'gray' }}>Stock used:</Text>
@@ -121,7 +126,8 @@ const ProductView = ({ route }) => {
       style={{
         flexDirection: "row", 
         justifyContent: "space-between",
-        alignItems: "center"
+        alignItems: "center", 
+        padding: 10
       }}
       >
         <View>
@@ -132,7 +138,7 @@ const ProductView = ({ route }) => {
             $600
         </Text>
         </View>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={()=> navigation.navigate("Preview")}>
             <View
             style={{
                 backgroundColor:"#036738",
