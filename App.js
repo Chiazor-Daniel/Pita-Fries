@@ -18,6 +18,15 @@ import Loyalty from './screens/loyalty';
 import Receipt1 from './screens/receipt1';
 import { MyContextProvider } from './context/context';
 import RecieptProgress from './components/receipt-progress';
+import Stock1 from './screens/stock-screens/stock1';
+import ViewStock from './screens/stock-screens/view-stock';
+import AddStock from './screens/stock-screens/add-stock';
+import AdminHome from './screens/admin/admin-home';
+import AdminSales from './screens/admin/admin-sales';
+import AdminCustomers from './screens/admin/admin-customers';
+import AdminProductReport from './screens/admin/admin-product-report';
+import AdminOrderReport from './screens/admin/admin-order-report';
+import AdminProductManagement from './screens/admin/admin-product-managemnt';
 
 
 const Stack = createNativeStackNavigator();
@@ -59,26 +68,26 @@ function ProductsStackNavigator() {
           component={Products}
           options={{ headerShown: false }}
         />
-        <ProductsStack.Screen 
+        <ProductsStack.Screen
           name="ProductView"
           component={ProductView}
           options={() => ({
             headerShown: false,
             gestureEnabled: true,
-           
-            
+
+
           })}
-          // sharedElements={(route) => {
-          //   const { productData } = route.params;
-          //   return [productData.id];
-          // }}
+        // sharedElements={(route) => {
+        //   const { productData } = route.params;
+        //   return [productData.id];
+        // }}
         />
         <ProductsStack.Screen
           name="Preview"
           component={Preview}
           options={{ headerShown: false }}
         />
-         <ProductsStack.Screen
+        <ProductsStack.Screen
           name="Preview2"
           component={Preview2}
           options={{ headerShown: false }}
@@ -94,15 +103,85 @@ function ProductsStackNavigator() {
           options={{ headerShown: false }}
         />
         {/* <RecieptProgress> */}
-          <ProductsStack.Screen
+        <ProductsStack.Screen
           name="Receipt1"
           component={Receipt1}
-          options={{headerShown: false}}
-          />
+          options={{ headerShown: false }}
+        />
         {/* </RecieptProgress> */}
+        <ProductsStack.Screen
+          name="StockStack"
+          component={StockNavigator}
+          options={{ headerShown: false }}
+        />
+        <ProductsStack.Screen
+          name="AdminStack"
+          component={AdminStackNavigator}
+          options={{ headerShown: false }}
+        />
       </ProductsStack.Navigator>
     </Layout>
   );
 }
 
+function StockNavigator() {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen
+        name="stock1"
+        component={Stock1}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name='view-stock'
+        component={ViewStock}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name='add-stock'
+        component={AddStock}
+        options={{ headerShown: false }}
+      />
+    </Stack.Navigator>
+  )
+}
+
+const AdminStack = createNativeStackNavigator();
+
+function AdminStackNavigator() {
+  return (
+    <Stack.Navigator>
+        <Stack.Screen
+          name="admin-home"
+          component={AdminHome}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="admin-sales"
+          component={AdminSales}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="admin-customers"
+          component={AdminCustomers}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="admin-product-report"
+          component={AdminProductReport}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="admin-order-report"
+          component={AdminOrderReport}
+          options={{ headerShown: false }}
+        />
+         <Stack.Screen
+          name="admin-product-management"
+          component={AdminProductManagement}
+          options={{ headerShown: false }}
+        />
+    </Stack.Navigator>
+  );
+}
 export default App;

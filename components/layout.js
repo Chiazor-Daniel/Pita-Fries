@@ -1,15 +1,16 @@
 import React, { useState } from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
-
+import { useNavigation } from '@react-navigation/native';
 const Layout = ({ children }) => {
   const [selectedIcon, setSelectedIcon] = useState('home');
+  const navigation = useNavigation();
 
   const iconData = [
-    { title: 'Home', name: 'home' },
+    { title: 'Home', name: 'home', goTo: "home" },
     { title: 'History', name: 'history' },
-    { title: 'Stocks', name: 'store' },
-    { title: 'Admin', name: 'person-pin' },
+    { title: 'Stocks', name: 'store',  goTo: "stock1" },
+    { title: 'Admin', name: 'person-pin', goTo: "admin-home" },
   ];
 
   const handleIconPress = (iconName) => {
@@ -30,8 +31,19 @@ const Layout = ({ children }) => {
         }}
       >
         {iconData.map((icon, index) => (
-          <View>
-            <TouchableOpacity>
+          <View key={index}>
+            <TouchableOpacity
+            onPress={() => {
+              if (icon.goTo === "stock1") {
+                  navigation.navigate('StockStack', { screen: 'stock1' });
+              } else if (icon.goTo === "admin-home") {
+                  navigation.navigate("AdminStack", { screen: "admin-home" });
+              } else {
+                  navigation.navigate('ProductsStack', { screen: 'Products' });
+              }
+          }}
+          
+            >
             <View
               key={index}
               style={{
@@ -41,6 +53,7 @@ const Layout = ({ children }) => {
                 borderRadius: 50,
                 backgroundColor: selectedIcon === icon.name ? '#F3BD1C' : 'transparent',
               }}
+
               onTouchEnd={() => handleIconPress(icon.name)}
             >
               <MaterialIcons name={icon.name} size={27} color={selectedIcon === icon.name ? 'white' : '#036738'} />

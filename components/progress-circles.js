@@ -56,7 +56,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     paddingHorizontal: 20,
     marginTop: 50,
-    gap: 50
+    width: "100%",
   },
   circleContainer: {
     alignItems: 'center',

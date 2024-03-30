@@ -1,7 +1,7 @@
 // ProductView.js
 
-import React, {useState} from 'react';
-import { View, Text, Image, StyleSheet, FlatList, TouchableOpacity } from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, Image, StyleSheet, FlatList, TouchableOpacity, ScrollView } from 'react-native';
 // import CheckBox from '@react-native-community/checkbox';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import { useNavigation } from '@react-navigation/native';
@@ -32,132 +32,132 @@ const ProductView = ({ route }) => {
   const renderStockItem = ({ item }) => (
     <TouchableOpacity>
 
-    <View style={styles.stockItem}>
-      <Image source={item.image} style={styles.stockItemImage} />
-      <View>
-        <View
-          style={{
-            flexDirection: 'row',
-            justifyContent: 'space-between',
-            gap: 20
-          }}
-        >
-          <Text style={styles.stockItemName}>{item.name}</Text>
-          <Text
+      <View style={styles.stockItem}>
+        <Image source={item.image} style={styles.stockItemImage} />
+        <View>
+          <View
             style={{
-              fontWeight: 'bold',
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+              gap: 20
             }}
           >
-            {item.weight}kg
-          </Text>
+            <Text style={styles.stockItemName}>{item.name}</Text>
+            <Text
+              style={{
+                fontWeight: 'bold',
+              }}
+            >
+              {item.weight}kg
+            </Text>
+          </View>
+          <Text style={styles.stockItemDetails}>{`$${item.price}`}</Text>
         </View>
-        <Text style={styles.stockItemDetails}>{`$${item.price}`}</Text>
       </View>
-    </View>
-</TouchableOpacity>
+    </TouchableOpacity>
   );
   const renderExtra = ({ item }) => (
     <TouchableOpacity>
-    <View
-    style={{
-        borderColor: "#2D8059",
-        borderWidth: 1,
-        padding: 10,
-        width: 110,
-        gap: 8,
-        justifyContent: "space-between",
-        // height: 130,
-        margin: 5,
-        borderRadius: 10
-    }}
-    >
-        
-      <Image source={item.image}/>
-      <View>
-        <View
-          style={{
-            alignItems: 'center'
-          }}
-        >
-          <Text style={{ fontSize: 16}}>{item.name}</Text>
+      <View
+        style={{
+          borderColor: "#2D8059",
+          borderWidth: 1,
+          padding: 10,
+          width: 110,
+          gap: 8,
+          justifyContent: "space-between",
+          // height: 130,
+          margin: 5,
+          borderRadius: 10
+        }}
+      >
+
+        <Image source={item.image} />
+        <View>
+          <View
+            style={{
+              alignItems: 'center'
+            }}
+          >
+            <Text style={{ fontSize: 16 }}>{item.name}</Text>
+          </View>
         </View>
       </View>
-    </View>
-</TouchableOpacity>
+    </TouchableOpacity>
   )
 
   return (
     <View style={styles.container}>
-        {/* <SharedElement id={productData.id}> */}
       <Image source={productData.src} style={styles.productImage} />
-        {/* </SharedElement> */}
       <TouchableOpacity
         style={{ position: 'absolute', top: 40, left: 10, backgroundColor: 'transparent', borderRadius: 50, borderColor: 'white', borderWidth: 1.4, padding: 10 }}
-        onPress={()=>navigation.goBack()}
-        >
+        onPress={() => navigation.goBack()}
+      >
         <MaterialIcons name="arrow-back" size={30} color="white" />
       </TouchableOpacity>
-      <View style={styles.productDetailsContainer}>
+        <View style={styles.productDetailsContainer}>
+      <ScrollView>
           <SharedElement id={productData.id}>
-        <Text style={styles.productName}>{productName}</Text>
-            </SharedElement>
-        <Text style={styles.productPrice}>{`$${productData.price}`}</Text>
-        <View style={{ flexDirection: 'column' }}>
-          <Text style={{ fontSize: 20, padding: 10, color: 'gray' }}>Stock used:</Text>
-          <FlatList
-            data={stockUsedData}
-            renderItem={renderStockItem}
-            keyExtractor={(item) => item.id}
-            horizontal
-            showsHorizontalScrollIndicator={false}
-          />
-        </View>
-        <View style={{ flexDirection: 'column' }}>
-          <Text style={{ fontSize: 20, padding: 10, color: 'gray' }}>Extras</Text>
-          <FlatList
-            data={extras}
-            renderItem={renderExtra}
-            keyExtractor={(item) => item.id}
-            horizontal
-            showsHorizontalScrollIndicator={false}
-          />
-        </View>
-      <View
-      style={{
-        flexDirection: "row", 
-        justifyContent: "space-between",
-        alignItems: "center", 
-        padding: 10
-      }}
-      >
-        <View>
-        <Text style={{padding: 7, fontSize:20, color: '#CA9D17'}}>
-            Total
-        </Text>
-        <Text style={{paddingLeft: 20, fontSize:20, color: 'gray'}}>
-            $600
-        </Text>
-        </View>
-        <TouchableOpacity onPress={()=> navigation.navigate("Preview")}>
-            <View
+            <Text style={styles.productName}>{productName}</Text>
+          </SharedElement>
+          <Text style={styles.productPrice}>{`$${productData.price}`}</Text>
+          <View style={{ flexDirection: 'column' }}>
+            <Text style={{ fontSize: 20, padding: 10, color: 'gray' }}>Stock used:</Text>
+            <FlatList
+              data={stockUsedData}
+              renderItem={renderStockItem}
+              keyExtractor={(item) => item.id}
+              horizontal
+              showsHorizontalScrollIndicator={false}
+            />
+          </View>
+          <View style={{ flexDirection: 'column' }}>
+            <Text style={{ fontSize: 20, padding: 10, color: 'gray' }}>Extras</Text>
+            <FlatList
+              data={extras}
+              renderItem={renderExtra}
+              keyExtractor={(item) => item.id}
+              horizontal
+              showsHorizontalScrollIndicator={false}
+            />
+          </View>
+          <View
             style={{
-                backgroundColor:"#036738",
-                padding: 16, 
-                borderRadius: 30
+              flexDirection: "row",
+              justifyContent: "space-between",
+              alignItems: "center",
+              padding: 10
             }}
-            >
-                <Text
-                style={{
-                    color: "white", 
-                    fontSize: 16
-                }}
-                >
-                Add to Basket
-                </Text>
+          >
+            <View>
+              <Text style={{ padding: 7, fontSize: 20, color: '#CA9D17' }}>
+                Total
+              </Text>
+              <Text style={{ paddingLeft: 20, fontSize: 20, color: 'gray' }}>
+                $600
+              </Text>
             </View>
-        </TouchableOpacity>
-      </View>
-      </View>
+            <TouchableOpacity onPress={() => navigation.navigate("Preview")}>
+              <View
+                style={{
+                  backgroundColor: "#036738",
+                  padding: 16,
+                  borderRadius: 30
+                }}
+              >
+                <Text
+                  style={{
+                    color: "white",
+                    fontSize: 16
+                  }}
+                >
+                  Add to Basket
+                </Text>
+              </View>
+            </TouchableOpacity>
+          </View>
+      </ScrollView>
+        </View>
     </View>
   );
 };
@@ -198,7 +198,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     padding: 10,
     margin: 5,
-    width: 150,
+    width: "auto",
     flexDirection: 'row',
     alignItems: 'center',
   },

@@ -194,7 +194,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     width: 200,
     position: "relative",
-    marginBottom: 10,
+    // marginBottom: 10,
     marginTop: 8,
     padding: 10,
   },

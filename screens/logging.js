@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { StyleSheet, View, ImageBackground, Image, Text, ProgressBarAndroid } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import { useNavigation } from '@react-navigation/native';
-
+import * as Progress from 'react-native-progress';
 const Logging = () => {
   const navigation = useNavigation();
   const [progress, setProgress] = useState(0);
@@ -42,12 +42,9 @@ const Logging = () => {
         </View>
         <Text style={styles.welcomeText}>WELCOME BACK</Text>
         <Text style={styles.subtitleText}>Batman</Text>
-        <ProgressBarAndroid
-          styleAttr="Horizontal"
-          indeterminate={false}
-          progress={progress} // Set the progress value (0 to 1)
-          style={styles.progressBar}
-        />
+        <View style={{marginTop: 10}}>
+          <Progress.Bar width={200} indeterminate={false} progress={progress} color='#CDE1D7' />
+        </View>
       </View>
     </ImageBackground>
   );
