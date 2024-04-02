@@ -5,6 +5,7 @@ import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import RecieptProgress from '../components/receipt-progress';
 
 const ViewCart = (props) => {
+    
     const [others, setOthers] = useState([
         { id: '1', name: "Big sized pepperoni sharwarma", src: require('../assets/shawarma.png'), price: 300 },
         { id: '2', name: "Fizz Double-beef burger", src: require('../assets/burger1.png'), price: 500 },

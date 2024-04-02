@@ -27,6 +27,7 @@ import AdminCustomers from './screens/admin/admin-customers';
 import AdminProductReport from './screens/admin/admin-product-report';
 import AdminOrderReport from './screens/admin/admin-order-report';
 import AdminProductManagement from './screens/admin/admin-product-managemnt';
+import AdminAddNewDish from './screens/admin/admin-add-new-dish';
 
 
 const Stack = createNativeStackNavigator();
@@ -179,6 +180,11 @@ function AdminStackNavigator() {
          <Stack.Screen
           name="admin-product-management"
           component={AdminProductManagement}
+          options={{ headerShown: false }}
+        />
+         <Stack.Screen
+          name="admin-add-new-dish"
+          component={AdminAddNewDish}
           options={{ headerShown: false }}
         />
     </Stack.Navigator>

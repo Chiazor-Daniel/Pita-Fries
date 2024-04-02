@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { View, Image, Text, FlatList, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
+import MyModal from '../../components/modal';
 const YourComponent = () => {
     const [cards, setCards] = useState([])
     const navigation = useNavigation()

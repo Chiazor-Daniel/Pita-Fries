@@ -4,8 +4,7 @@ import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import * as DocumentPicker from 'expo-document-picker';
 
 
-
-export default function ProfileImgName() {
+export default function AddImage({handleProductImage}) {
     const [imageFile, setImageFile] = useState(null);
 
     const pickImage = async () => {
@@ -18,7 +17,8 @@ export default function ProfileImgName() {
             if (result.canceled || !result) {
                 return;
             } else {
-                setImageFile(result.assets[0].uri);
+                handleProductImage(result.assets[0].uri);
+                // handleProductImage(imageFile)
             }
         } catch (err) {
             console.error('Error picking Image:', err);
