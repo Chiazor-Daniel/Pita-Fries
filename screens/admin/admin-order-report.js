@@ -7,7 +7,7 @@ import MyModal from '../../components/modal';
 import { ScrollView } from 'react-native';
 import RNHTMLtoPDF from 'react-native-html-to-pdf';
 
-  
+
 
 const AdminOrderReport = () => {
     const navigation = useNavigation()
@@ -37,10 +37,10 @@ const AdminOrderReport = () => {
         { date: '09/21/2023', customer: { name: 'Bruce Wayne', email: 'BruceWayne@gmail.com' }, totalPayment: '$310', status: 'Active', paymentMethod: 'cash', loyaltyCode: '32759467', orders: others },
         { date: '06/18/2023', customer: { name: 'Diana', email: 'diana@gmail.com' }, totalPayment: '$24', status: 'Inactive', paymentMethod: 'cash', loyaltyCode: '29472910', orders: others },
     ];
-    
-const createPDF = async () => {
-    // Define the HTML content for the PDF
-    const htmlContent = `
+
+    const createPDF = async () => {
+        // Define the HTML content for the PDF
+        const htmlContent = `
       <html>
         <body>
           <h1>Order Details</h1>
@@ -59,35 +59,35 @@ const createPDF = async () => {
         </body>
       </html>
     `;
-  
-    // Set options for PDF generation
-    const options = {
-      html: htmlContent,
-      fileName: 'Order_Details',
-      directory: 'Documents',
+
+        // Set options for PDF generation
+        const options = {
+            html: htmlContent,
+            fileName: 'Order_Details',
+            directory: 'Documents',
+        };
+
+        // Generate PDF
+        try {
+            const file = await RNHTMLtoPDF.convert(options);
+            console.log('PDF file generated:', file.filePath);
+            // Now you can share the generated PDF file
+            sharePDF(file.filePath);
+        } catch (error) {
+            console.error('Error generating PDF:', error);
+        }
     };
-  
-    // Generate PDF
-    try {
-      const file = await RNHTMLtoPDF.convert(options);
-      console.log('PDF file generated:', file.filePath);
-      // Now you can share the generated PDF file
-      sharePDF(file.filePath);
-    } catch (error) {
-      console.error('Error generating PDF:', error);
-    }
-  };
-  
-  const sharePDF = (filePath) => {
-    // Implement sharing functionality here
-    // You can use React Native Share API or any other method to share the PDF file
-    // For example:
-    // Share.open({
-    //   url: filePath,
-    //   title: 'Share PDF',
-    //   subject: 'Order Details',
-    // });
-  };
+
+    const sharePDF = (filePath) => {
+        // Implement sharing functionality here
+        // You can use React Native Share API or any other method to share the PDF file
+        // For example:
+        // Share.open({
+        //   url: filePath,
+        //   title: 'Share PDF',
+        //   subject: 'Order Details',
+        // });
+    };
 
 
 
@@ -216,46 +216,84 @@ const createPDF = async () => {
                         <Text style={{ color: "gray" }}>Phone no: </Text>
                         <Text style={{ color: "gray" }}>Payment Type: {selectedOrder.paymentMethod}</Text>
                     </View>
-                    <ScrollView style={{ height: 250, borderWidth: 0.4, borderColor: "gray", paddingHorizontal: 4, width: "100%", borderRadius: 6 , marginTop: 10}}>
+                    <ScrollView style={{ height: 250, borderWidth: 0.4, borderColor: "gray", paddingHorizontal: 4, width: "100%", borderRadius: 6, marginTop: 10 }}>
                         <View style={{ width: "100%", marginTop: 12, gap: 10 }}>
                             {selectedOrder.orders.map((item) => (
-                                <View key={item.id} style={{ flexDirection: "row", alignItems: 'center', gap: 6, borderBottomWidth: 0.3, borderColor: "gray", paddingHorizontal: 10, paddingVertical: 10}}>
+                                <View key={item.id} style={{ flexDirection: "row", alignItems: 'center', gap: 6, borderBottomWidth: 0.3, borderColor: "gray", paddingHorizontal: 10, paddingVertical: 10 }}>
                                     <Image source={item.src} style={{ width: 50, height: 50, borderRadius: 100 }} />
                                     <View>
                                         <Text>{item.name}</Text>
                                         <Text>X4</Text>
-                                        <Text style={{fontWeight: "bold"}}>${item.price}</Text>
+                                        <Text style={{ fontWeight: "bold" }}>${item.price}</Text>
                                     </View>
                                 </View>
                             ))}
                         </View>
                     </ScrollView>
-                    <View style={{flexDirection: "row", justifyContent: "flex-end", width: "100%", marginTop: 10}}>
-                        <View style={{gap: 6}}>
-                            <View style={{flexDirection: 'row', alignItems: "center"}}>
+                    <View style={{ flexDirection: "row", justifyContent: "flex-end", width: "100%", marginTop: 10 }}>
+                        <View style={{ gap: 6 }}>
+                            <View style={{ flexDirection: 'row', alignItems: "center" }}>
                                 <Text>SubTotal: </Text>
-                                <Text style={{fontWeight: "bold", fontSize: 17}}>$800</Text>
+                                <Text style={{ fontWeight: "bold", fontSize: 17 }}>$800</Text>
                             </View>
-                            <View style={{flexDirection: 'row', alignItems: "center"}}>
+                            <View style={{ flexDirection: 'row', alignItems: "center" }}>
                                 <Text>Discount: </Text>
-                                <Text style={{fontWeight: "bold", fontSize: 17}}>-$100</Text>
+                                <Text style={{ fontWeight: "bold", fontSize: 17 }}>-$100</Text>
                             </View>
-                            <View style={{flexDirection: 'row', alignItems: "center"}}>
+                            <View style={{ flexDirection: 'row', alignItems: "center" }}>
                                 <Text>Total: </Text>
-                                <Text style={{fontWeight: "bold", fontSize: 17}}>$700</Text>
+                                <Text style={{ fontWeight: "bold", fontSize: 17 }}>$700</Text>
                             </View>
                         </View>
                     </View>
-                    <View style={{flexDirection: "row", width: "100%", marginTop: 10}}>
-                        <TouchableOpacity onPress={createPDF} style={{padding: 10, flexDirection: "row", gap: 10, backgroundColor: "#036738", width: "50%", borderRightColor: "white", borderWidth: 1, alignItems: "center", borderTopLeftRadius: 20, borderBottomLeftRadius: 20}}>
-                            <MaterialIcons name='download' color={"white"} size={20}/>
-                            <Text style={{color: "white", fontSize: 20}}>Download</Text>
+                    <View style={{ flexDirection: "row", width: "100%", marginTop: 10 }}>
+                        <TouchableOpacity
+                            onPress={createPDF}
+                            style={{
+                                padding: 10,
+                                flexDirection: "row",
+                                gap: 10,
+                                backgroundColor: "#036738",
+                                width: "50%",
+                                borderRightColor: "white",
+                                borderWidth: 1,
+                                alignItems: "center",
+                                borderTopLeftRadius: 20,
+                                borderBottomLeftRadius: 20,
+                                opacity: selectedOrder.status == "Active" ? 1 : 0.3, // Set opacity based on status
+                                cursor: selectedOrder.status == "Active" ? "pointer" : "not-allowed", // Change cursor based on status
+                            }}
+                            disabled={selectedOrder.status === "Active"} // Disable the button based on status
+                        >
+                            <MaterialIcons name='download' color={"white"} size={20} />
+                            <Text style={{ color: "white", fontSize: 20 }}>Download</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity style={{padding: 10,flexDirection: "row", gap: 10, backgroundColor: "#036738", width: "50%", alignItems: "center", borderBottomRightRadius: 20, borderTopRightRadius: 20}}>
-                        <MaterialIcons name='share' color={"white"} size={20}/>
-                            <Text style={{color: "white", fontSize: 20}}>Share</Text>
+                        <TouchableOpacity
+                            style={{
+                                padding: 10,
+                                flexDirection: "row",
+                                gap: 10,
+                                backgroundColor: "#036738",
+                                width: "50%",
+                                alignItems: "center",
+                                borderBottomRightRadius: 20,
+                                borderTopRightRadius: 20,
+                                opacity: selectedOrder.status == "Active" ? 1 : 0.3, // Set opacity based on status
+                                cursor: selectedOrder.status == "Active" ? "pointer" : "not-allowed", // Change cursor based on status
+                            }}
+                            disabled={selectedOrder.status === "Active"} // Disable the button based on status
+                        >
+                            <MaterialIcons name='share' color={"white"} size={20} />
+                            <Text style={{ color: "white", fontSize: 20 }}>Share</Text>
                         </TouchableOpacity>
                     </View>
+                    {
+                        selectedOrder.status !== "Active" && (
+                        <View style={{position: "absolute", justifyContent: "center", bottom: 100}}>
+                            <Image source={require("../../assets/cancel.png")} style={{margin: "auto"}}/>
+                        </View>
+                        )
+                    }
                 </MyModal>
             )}
         </ImageBackground>
